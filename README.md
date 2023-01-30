@@ -9,7 +9,7 @@ The fun part in the process is that there is a .idl (interface definition langua
 This way, you can write something like that:
 
 ```ts
-![screenshot](C:\Sandbox\deno\test2\doc\screenshot.png)import * as qt from "./qt.ts"
+import * as qt from "./qt.ts"
 
 //debugger;
 const app = new qt.QApplication( "" );
