@@ -5,7 +5,7 @@ const app = new qt.QApplication( "" );
 
 const frame = new qt.QWidget( );
 frame.setWindowTitle( "Deno demo" );
-frame.setWindowIcon( "assets/logo_pool.png" );
+frame.setWindowIcon( "assets/mylogo.png" );
 
 const label = new qt.QLabel( "hello, this is a label" );
 const button = new qt.QPushButton( "button" );
