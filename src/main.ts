@@ -14,9 +14,9 @@ const medit = new qt.QTextEdit( );
 
 const layout = new qt.QVBoxLayout( );
 layout.addWidget( label )
-layout.addWidget( button )
 layout.addWidget( edit )
 layout.addWidget( medit )
+layout.addWidget( button )
 
 frame.setLayout( layout );
 frame.show( );
