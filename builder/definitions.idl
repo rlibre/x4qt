@@ -1,0 +1,129 @@
+cpp_code {
+	#include <QtCore/qdir.h>
+
+	const char* make_ts_buffer( const QString& r ) {
+		static QByteArray ba;
+		
+		QByteArray b = r.toUtf8();
+		uint32_t ln = (uint32_t)b.length();
+		uint8_t len[4] = { uint8_t(ln>>24), uint8_t(ln>>16), uint8_t(ln>>8), uint8_t(ln) };
+
+		b.insert( 0, (char*)len, 4 );
+		return b.data( );
+	}
+}
+
+h_code {
+	#pragma once
+	#include <stdint.h>
+
+	#include <QtWidgets/qapplication.h>
+	#include <QtWidgets/qwidget.h>
+	#include <QtWidgets/qlayout.h>
+	#include <QtWidgets/qformlayout.h>
+	#include <QtWidgets/qlabel.h>
+	#include <QtWidgets/qpushbutton.h>
+	#include <QtWidgets/qlineedit.h>
+	#include <QtWidgets/qtextedit.h>
+}
+
+ts_code {
+	import { Buffer } from "node:buffer"
+
+	const stdEncoder = new TextEncoder();
+
+	function make_c_str( str: string ) : Uint8Array {
+		// small hack, i add a zero terminal for the c part
+		return stdEncoder.encode(str+"\u0000");	
+	}
+
+	function read_c_str( input: Deno.PointerValue ): string {
+		debugger;
+		return "";
+	}
+
+	function make_c_buffer( buf: Buffer ) {
+		const ln = buf.length;
+		const rc = Buffer.allocUnsafe( ln+4 );
+		
+		rc.writeUint32BE( ln, 0 );
+		rc.set( buf, 4 );
+		return rc;
+	}
+
+	class QTWrapper {
+		protected _self;
+		constructor( self: any ) { 
+			console.assert( self!=null );
+			this._self = self; 
+		}
+	}
+	
+
+}
+
+class QApplication {
+	constructor( cmdline: string ) {
+		QDir cwd;
+		QString app = cwd.absolutePath( );
+		
+		QStringList paths = QStringList( ) 
+			<< app.append( "/plugins" )
+			<< app.append( "/plugins/platforms" );
+
+		QApplication::setLibraryPaths( paths );
+
+
+		static int n = 1;
+		static char* a[] = { (char*)cmdline };
+		return new QApplication( n, a );
+	}
+
+	exec( ): i32;
+}
+
+class QWidget {
+	show( ): void;
+	setWindowTitle( title: string ): void;
+	setWindowIcon( icon: string ): void {
+		_self->setWindowIcon( QIcon(icon) );
+	}
+
+	setLayout( layout: QLayout );
+}
+
+class QLayout {
+	@abstract
+}
+
+class QHBoxLayout extends QLayout {
+}
+
+class QVBoxLayout extends QLayout {
+	addWidget( widget: QWidget );
+}
+
+class QFormLayout extends QLayout {
+}
+
+class QLabel extends QWidget {
+	constructor( text: string );
+	setText( text: string );
+	text( ) : string;
+}
+
+class QPushButton extends QWidget {
+	constructor( text: string );
+	setText( text: string );
+	text( ) : string;
+}
+
+class QLineEdit extends QWidget {
+	setText( text: string );
+	text( ) : string;
+}
+
+class QTextEdit extends QWidget {
+	setText( text: string );
+	toPlainText( ) : string;	
+}

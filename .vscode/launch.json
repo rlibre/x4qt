@@ -1,0 +1,40 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"request": "launch",
+			"name": "Launch test",
+			"type": "node",
+			"program": "${workspaceFolder}/src/main.ts",
+			"cwd": "${workspaceFolder}/bin",
+			"runtimeExecutable": "C:\\Users\\ecoch\\.deno\\bin\\deno.EXE",
+			"stopOnEntry": true,
+			"runtimeArgs": [
+				"run",
+				"--unstable",
+				"--inspect-wait",
+				"--allow-all"
+			],
+			"attachSimplePort": 9229
+		},
+		{
+			"request": "launch",
+			"name": "Launch builder",
+			"type": "node",
+			"program": "${workspaceFolder}/builder/builder.ts",
+			"cwd": "${workspaceFolder}/builder",
+			"runtimeExecutable": "C:\\Users\\ecoch\\.deno\\bin\\deno.EXE",
+			"stopOnEntry": true,
+			"runtimeArgs": [
+				"run",
+				"--unstable",
+				"--inspect-wait",
+				"--allow-all"
+			],
+			"attachSimplePort": 9229
+		}
+	]
+}

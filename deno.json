@@ -1,0 +1,12 @@
+{
+	"imports": {
+	  "std/": "https://deno.land/std@0.174.0/"
+	},
+	"tasks": {
+	  "dev": "deno run --allow-all --unstable src/main.ts",
+	  "compile": "deno compile --allow-all --unstable --output bin/src.exe src/main.ts"
+	},
+	"compilerOptions": {
+		"strictNullChecks": false
+	}
+  }
